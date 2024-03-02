@@ -28,4 +28,6 @@ urlpatterns = [
     path('studios/<int:pk>/', studio_detail, name='studio_detail'),
     path('teachers/', teacher_list, name='teacher_list'),
     path('teachers/<int:pk>/', teacher_detail, name='teacher_detail'),
+    path('register/', register, name='register'),
+    path('login/', user_login, name='login'),
 ]
