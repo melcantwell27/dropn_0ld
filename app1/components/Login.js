@@ -21,7 +21,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await loginUser(formData);
-      router.push('/dashboard'); // Redirect to dashboard after successful login
+      router.push('/'); // Redirect to root after successful login
     } catch (error) {
       console.error('Login failed:', error);
       // Handle login error (e.g., display error message)
