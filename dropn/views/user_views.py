@@ -34,7 +34,8 @@ def register(request):
 #             return Response({'error': 'Invalid username or password'}, status=status.HTTP_400_BAD_REQUEST)
 #     else:
 #         return Response({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
-    
+
+
 @api_view(['POST', 'GET'])
 def user_login(request):
     if request.method == 'POST':
@@ -45,6 +46,9 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
+            # Set username in session data
+            request.session['username'] = username
+            request.session['userId'] = user.id
             return Response({'message': 'Login successful'}, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid username or password'}, status=status.HTTP_400_BAD_REQUEST)

@@ -30,4 +30,8 @@ urlpatterns = [
     path('teachers/<int:pk>/', teacher_detail, name='teacher_detail'),
     path('register/', register, name='register'),
     path('login/', user_login, name='login'),
+    path('my/classes/', get_user_dance_classes),
+    path('enroll/<int:id>', enroll),
+    path('unenroll/<int:id>', unenroll),
+    path('classes/create/', create_class)
 ]
