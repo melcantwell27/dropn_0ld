@@ -39,48 +39,57 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
+    <div className="p-4">
+      <h2 className="text-2xl font-semibold mb-4 mx-auto block">Register Below!</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <label className="block font-bold">
           Username:
           <input
             type="text"
             name="username"
             value={formData.username}
             onChange={handleChange}
+            className="block w-full border rounded-md py-2 px-3"
           />
         </label>
-        <br />
-        <label>
+        <label className="block  font-bold">
           Password:
           <input
             type="password"
             name="password1"
             value={formData.password1}
             onChange={handleChange}
+            className="block w-full border rounded-md py-2 px-3"
           />
         </label>
-        <br />
-        <label>
+        <label className="block font-bold">
           Confirm Password:
           <input
             type="password"
             name="password2"
             value={formData.password2}
             onChange={handleChange}
+            className="block w-full border rounded-md py-2 px-3"
           />
         </label>
-        <br />
-        <label>
+        <label className="block font-bold">
           Role:
-          <select name="role" value={formData.role} onChange={handleChange}>
+          <select
+            name="role"
+            value={formData.role}
+            onChange={handleChange}
+            className="block w-full border rounded-md py-2 px-3"
+          >
             <option value="student">Student</option>
             <option value="teacher">Teacher</option>
           </select>
         </label>
-        <br />
-        <button type="submit">Register</button>
+        <button
+          type="submit"
+          className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mx-auto block"
+        >
+          Register
+        </button>
       </form>
     </div>
   );

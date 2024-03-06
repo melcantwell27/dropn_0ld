@@ -31,7 +31,7 @@ function ClassCard({ lesson, onEnroll }) {
   };
 
   return (
-    <div className="border rounded-lg p-4 mb-4">
+    <div className="border-4 border-pink-800 rounded-lg p-4 mb-4">
       <h2 className="text-xl font-bold mb-2">{lesson.class_name}</h2>
       <p>Date: {formattedDate}</p>
       <p>Time: {formattedTime}</p>

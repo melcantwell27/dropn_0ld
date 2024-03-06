@@ -5,6 +5,7 @@ const StudentSchedule = () => {
   // State variables to store classes and username
   const [classes, setClasses] = useState([]);
   const [username, setUsername] = useState('');
+  
 
   // useEffect hook to fetch data when component mounts
   useEffect(() => {
@@ -31,8 +32,7 @@ const StudentSchedule = () => {
   // Render UI with fetched data
   return (
     <div>
-      <h2>Welcome {username}!</h2>
-      <h3>My Classes</h3>
+      <h2>My Classes</h2>
       <ul>
         {/* Map over classes array and render class details */}
         {classes.map((classItem) => (
