@@ -64,3 +64,21 @@ export const loginUser = async (userData) => {
     throw error; // Throw the error for handling in the component
   }
 };
+
+// utils/api.js
+
+export const createNewClass = async (formData) => {
+  try {
+    const response = await fetch('http://localhost:8000/classes/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error('Error creating class:', error);
+  }
+};

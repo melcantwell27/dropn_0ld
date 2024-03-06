@@ -4,6 +4,8 @@ from rest_framework import status
 from ..models import User
 from ..serializers import TeacherSerializer
 from django.views.decorators.csrf import csrf_exempt
+from ..serializers import DanceClassSerializer
+from ..models import DanceClass
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
@@ -45,3 +47,20 @@ def teacher_detail(request, pk):
     elif request.method == 'DELETE':
         teacher.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@csrf_exempt
+@api_view(['GET'])
+def teacher_schedule(request):
+    """
+    API endpoint to allow teachers to view their schedule of classes.
+
+    Returns:
+        Response: HTTP response containing the list of classes taught by the authenticated teacher.
+    """
+    try:
+        teacher = request.user
+        classes = DanceClass.objects.filter(teacher=teacher)
+        serializer = DanceClassSerializer(classes, many=True)
+        return Response(serializer.data)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

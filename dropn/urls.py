@@ -56,5 +56,7 @@ urlpatterns = [
     path('my/classes/', csrf_exempt(get_user_dance_classes)),  # CSRF protection bypassed
     path('enroll/<int:id>', csrf_exempt(enroll)),  # CSRF protection bypassed
     path('unenroll/<int:id>', csrf_exempt(unenroll)),  # CSRF protection bypassed
-    path('classes/create/', create_class)  # Requires authentication
+    path('classes/create/', create_class),  # Requires authentication
+    path('classes/delete/<int:pk>/', delete_class, name='delete_class'),
+    path('teacher/schedule/', teacher_schedule, name='teacher_schedule')
 ]

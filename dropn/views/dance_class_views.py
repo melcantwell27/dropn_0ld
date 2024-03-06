@@ -259,3 +259,24 @@ def create_class(request):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response({'error': 'Must be a teacher to create a class'}, status=status.HTTP_403_FORBIDDEN)
+
+@api_view(['DELETE'])
+def delete_class(request, pk):
+    """
+    API endpoint to allow teachers to delete a dance class they've created.
+
+    Args:
+        pk (int): Primary key of the class to be deleted.
+
+    Returns:
+        Response: HTTP response indicating success or failure of class deletion.
+    """
+    try:
+        class_instance = DanceClass.objects.get(pk=pk)
+        if request.user == class_instance.teacher:
+            class_instance.delete()
+            return Response({'message': 'Dance class deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response({'error': 'You are not authorized to delete this class'}, status=status.HTTP_403_FORBIDDEN)
+    except DanceClass.DoesNotExist:
+        return Response({'error': 'Dance class not found'}, status=status.HTTP_404_NOT_FOUND)

@@ -21,4 +21,6 @@ __all__ = [
     'enroll',
     'unenroll',
     'create_class',
+    'delete_class', 
+    'teacher_schedule'
 ]
