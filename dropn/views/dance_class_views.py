@@ -135,7 +135,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
-# from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 
 
 @csrf_exempt
@@ -154,7 +154,7 @@ def dance_class_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 @csrf_exempt
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 @api_view(['GET', 'PUT', 'DELETE', 'POST'])
 def dance_class_detail(request, pk):
     try:
@@ -188,7 +188,7 @@ def dance_class_detail(request, pk):
 
 
 @csrf_exempt
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def get_user_dance_classes(request):
     user = request.user
@@ -204,13 +204,13 @@ def get_user_dance_classes(request):
     serializer = DanceClassSerializer(classes, many=True)
     return Response(serializer.data)
 
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def enroll(request, id):
     try:
-        # user = request.user
+        user = request.user
 
-        user = User.objects.get(pk=11)
+        # user = User.objects.get(pk=11)
 
         dance_class = DanceClass.objects.get(pk=id)
 
@@ -224,13 +224,13 @@ def enroll(request, id):
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def unenroll(request, id):
     try:
-        # user = request.user
+        user = request.user
 
-        user = User.objects.get(pk=11)
+        # user = User.objects.get(pk=11)
         
         dance_class = DanceClass.objects.get(pk=id)
         
@@ -244,7 +244,7 @@ def unenroll(request, id):
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 @api_view(['POST'])
 def create_class(request):
     user = request.user
