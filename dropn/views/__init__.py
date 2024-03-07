@@ -22,5 +22,7 @@ __all__ = [
     'unenroll',
     'create_class',
     'delete_class', 
-    'teacher_schedule'
+    'teacher_schedule',
+    'user_logout',
+    'check_user_logged_in'
 ]

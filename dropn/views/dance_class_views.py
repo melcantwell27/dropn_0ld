@@ -192,14 +192,13 @@ def dance_class_detail(request, pk):
 @api_view(['GET'])
 def get_user_dance_classes(request):
     user = request.user
-    
-    # Temporarily bypassing authentication
-    # if user.is_student:
-    classes = DanceClass.objects.filter(students=user)
-    # elif user.is_teacher:
-    #     classes = DanceClass.objects.filter(teacher=user)
-    # else:
-    #     classes = DanceClass.objects.none()
+   
+    if user.is_student:
+        classes = DanceClass.objects.filter(students=user)
+    elif user.is_teacher:
+        classes = DanceClass.objects.filter(teacher=user)
+    else:
+        classes = DanceClass.objects.none()
 
     serializer = DanceClassSerializer(classes, many=True)
     return Response(serializer.data)

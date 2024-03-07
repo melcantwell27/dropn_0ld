@@ -6,7 +6,7 @@ SECRET_KEY = 'django-insecure-n73n*9-zp@^5nr10(3vhdq6*1l_(&08c%7pyfoxi&_qjfsnbxg
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -15,13 +15,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',  # Include Django REST Framework
+    'rest_framework',
+    'corsheaders',  # Add corsheaders to installed apps
     'dropn'
 ]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # Add this line for CORS support
+    'corsheaders.middleware.CorsMiddleware',  # Add corsheaders middleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -91,8 +93,30 @@ REST_FRAMEWORK = {
 }
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = False
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',  # Add your whitelisted origins here
-    # Add more origins as needed
+CORS_ALLOW_ALL_ORIGINS = True  # Allow all origins, or you can specify specific origins in CORS_ALLOWED_ORIGINS
+
+CORS_ALLOW_CREDENTIALS = True  # Allow credentials to be included in CORS requests
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
 ]
+
+# CORS_ALLOW_HEADERS = [
+#     'cookie',
+#     'accept',
+#     'accept-encoding',
+#     'authorization',
+#     'content-type',
+#     'dnt',
+#     'origin',
+#     'user-agent',
+#     'x-csrf-token',
+#     'x-requested-with',
+# ]
+
+CORS_ALLOW_HEADERS = ['*']

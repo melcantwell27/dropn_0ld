@@ -58,5 +58,7 @@ urlpatterns = [
     path('unenroll/<int:id>', csrf_exempt(unenroll)),  # CSRF protection bypassed
     path('classes/create/', create_class),  # Requires authentication
     path('classes/delete/<int:pk>/', delete_class, name='delete_class'),
-    path('teacher/schedule/', teacher_schedule, name='teacher_schedule')
+    path('teacher/schedule/', teacher_schedule, name='teacher_schedule'),
+    path('logout/', user_logout, name='user_logout'),
+    path('check-user-logged-in/', check_user_logged_in, name='check_user_logged_in'),
 ]

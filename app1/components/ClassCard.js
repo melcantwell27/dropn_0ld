@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function ClassCard({ lesson, onEnroll }) {
+function ClassCard({ lesson, enrolled, onEnroll, onUnenroll }) {
   // Convert datetime string to a more readable format for a dance class website
   const formattedDate = new Date(lesson.datetime).toLocaleDateString('en-US', {
     weekday: 'long',
@@ -8,26 +8,19 @@ function ClassCard({ lesson, onEnroll }) {
     month: 'long',
     day: 'numeric',
   });
-  
+
   const formattedTime = new Date(lesson.datetime).toLocaleTimeString('en-US', {
     hour: 'numeric',
     minute: 'numeric',
     hour12: true,
   });
 
-  const [enrolled, setEnrolled] = useState(false);
-
   const handleToggleEnroll = (classId) => {
     if (enrolled) {
-      // If already enrolled, call unenroll function
-      console.log(`Unenrolling user from class ${classId}`);
-      // Call unenroll function
+      onUnenroll(classId);
     } else {
-      // If not enrolled, call enroll function
-      console.log(`Enrolling user in class ${classId}`);
-      // Call enroll function
+      onEnroll(classId);
     }
-    setEnrolled(!enrolled); // Toggle enrolled state
   };
 
   return (
