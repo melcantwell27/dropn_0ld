@@ -29,7 +29,7 @@ function ClassCard({ lesson, enrolled, onEnroll, onUnenroll }) {
       <p>Date: {formattedDate}</p>
       <p>Time: {formattedTime}</p>
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+        className={`font-bold py-2 px-4 rounded mt-2 ${enrolled ? 'bg-purple-500 hover:bg-red-700' : 'bg-blue-500 hover:bg-blue-700'} text-white`}
         onClick={() => handleToggleEnroll(lesson.id)}
       >
         {enrolled ? 'Unenroll' : 'Enroll'}

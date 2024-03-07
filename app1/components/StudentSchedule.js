@@ -1,46 +1,38 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchStudentClasses } from '../utils/api';
 
-const StudentSchedule = () => {
-  // State variables to store classes and username
-  const [classes, setClasses] = useState([]);
-  const [username, setUsername] = useState('');
-  
+function formatDateTime(datetime) {
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = new Date(datetime).toLocaleDateString('en-US', options);
+  const formattedTime = new Date(datetime).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+  return `${formattedDate}, ${formattedTime}`;
+}
 
-  // useEffect hook to fetch data when component mounts
+const StudentSchedule = () => {
+  const [classes, setClasses] = useState([]);
+
   useEffect(() => {
-    // Function to fetch user data including username and student classes
     async function fetchData() {
       try {
-        // Fetch student classes
         const classesResponse = await fetchStudentClasses();
-        // Set the fetched classes in state
         setClasses(classesResponse);
-        
-        // Assuming the username is also fetched along with classesResponse
-        // Set the username in state
-        setUsername(classesResponse.username);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     }
 
-    // Call fetchData function when component mounts
     fetchData();
   }, []);
 
-  // Render UI with fetched data
   return (
-    <div>
-      <h2>My Classes</h2>
-      <ul>
-        {/* Map over classes array and render class details */}
-        {classes.map((classItem) => (
-          <li key={classItem.id}>
-            {classItem.class_name} - {classItem.datetime}
-          </li>
-        ))}
-      </ul>
+    <div className="bg-gray-100 p-4 rounded-lg">
+      {classes.map((classItem) => (
+        <div key={classItem.id} className="bg-white shadow-md rounded-lg p-4 mb-4">
+          <h3 className="text-lg font-bold">{classItem.class_name}</h3>
+          <p>Date: {formatDateTime(classItem.datetime)}</p>
+          {/* If you want to include additional information, you can add them here */}
+        </div>
+      ))}
     </div>
   );
 };

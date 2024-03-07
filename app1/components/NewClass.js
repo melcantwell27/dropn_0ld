@@ -1,7 +1,7 @@
 // components/NewClass.js
 
 import { useState } from 'react';
-import { createClass } from '../utils/api'; // Assuming you have a createClass function in your utils/api.js file
+import { createNewClass } from '../utils/api'; // Assuming you have a createClass function in your utils/api.js file
 
 const NewClass = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +23,9 @@ const NewClass = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await createClass(formData);
+      // Format datetime string to match Django model format
+      const formattedDateTime = new Date(formData.datetime).toISOString();
+      const response = await createNewClass({ ...formData, datetime: formattedDateTime });
       if (response.ok) {
         alert(`Thanks ${formData.teacher}! ${formData.className} has been added to the roster! Sweet moves!`);
       } else {
@@ -34,6 +36,7 @@ const NewClass = () => {
       setError('Oops, the new class didn\'t send. Try again?');
     }
   };
+  
 
   return (
     <div className="p-4">

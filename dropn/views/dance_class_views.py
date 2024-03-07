@@ -243,7 +243,7 @@ def unenroll(request, id):
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 @api_view(['POST'])
 def create_class(request):
     user = request.user
