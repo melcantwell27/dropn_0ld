@@ -74,17 +74,6 @@ const NewClass = () => {
           />
         </label>
         <label className="block font-bold">
-          Teacher:
-          <input
-            type="text"
-            name="teacher"
-            placeholder="optional"
-            value={formData.teacher}
-            onChange={handleChange}
-            className="block w-full border rounded-md py-2 px-3"
-          />
-        </label>
-        <label className="block font-bold">
           Genre:
           <input
             type="text"
