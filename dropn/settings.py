@@ -1,4 +1,5 @@
 from pathlib import Path
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -54,9 +55,9 @@ WSGI_APPLICATION = 'dropn.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db',
-        'USER': 'db_user',
-        'PASSWORD': 'SlowSteady',
+        'NAME': config('DB_NAME', default='', cast=str),
+        'USER': config('DB_USER', default='', cast=str),
+        'PASSWORD': config('DB_PASSWORD', default='', cast=str),
         'HOST': 'localhost',
         'PORT': '5432',
     }
